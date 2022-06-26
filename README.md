@@ -119,3 +119,45 @@ python3 manage.py migrate
     <p>{{msg}}</p>
     <a href="{% url goto %}">{{goto}}</a>
   ```
+
+  ## 静的ファイル(static)の読み込み
+  - html
+  ```html
+  {% load static %}
+    <head>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+  ```
+  - settings.py
+  ```python
+  STATIC_URL = "static/"
+  STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+  ```
+  - プロジェクトルートにstaticディレクトリを作成
+
+## formの作成
+- action属性にはurlテンプレートタグを使う
+- postを使用することで、formから送信された値を取り出す時に役立つ
+- postかgetか区別したい時は以下のようにrequest.methodを使用する
+  ```python
+  if request.method == "POST":
+          params["msg"] = ("名前:" + request.POST["name"] + "</br>mail:" +
+                          request.POST["mail"] + "</br>年齢:" +
+                          request.POST["age"])
+          params["form"] = HelloForm(request.POST)
+  ```
+
+## froms.pyの作成
+- fromsを作成することで、簡単にフォーム管理ができる
+- forms.Formを継承する
+- formで使用する値を変数として定義する
+- 引数にlabelを設定するとテンプレートでlabelが入る
+- forms.py
+  ```python
+  from django import forms
+
+  class HelloForm(forms.Form):
+    name = forms.CharField(lavel="name")
+    mail = forms.CharField(lavel="mail")
+    age = forms.IntegerField(label="age")
+  ```
