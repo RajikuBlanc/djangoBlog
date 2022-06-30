@@ -1,5 +1,13 @@
 # Django Blog Project
 
+## デバッグの方法
+- 拡張機能Pythonのインストール
+- 実行とデバッグを開いてlaunch.jsonを作成
+- python→Djangoを選択
+- ルートにmanage.pyがあれば特に修正なしでもいい
+- Pythonのバージョンがあっているか確認
+
+
 ## 仮想環境の作成
 - fishでvenvを起動する場合は.fishファイルを使用する
 ```fish
